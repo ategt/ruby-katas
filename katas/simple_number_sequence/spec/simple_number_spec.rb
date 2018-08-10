@@ -158,6 +158,15 @@ describe SimpleNumbers do
 
     end
 
+    it "should return 5556 - 5596, it was having issues, though." do
+
+      input = (5556..5596).to_a.map(&:to_s).join.sub '5576',''
+      first_result, second_result = SimpleNumbers.boundry_integers(input)
+      expect(first_result).to eq 5556
+      expect(second_result).to eq 5596
+
+    end
+
   end
 
   # bundle exec rspec spec/simple_number_spec.rb

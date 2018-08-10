@@ -51,7 +51,8 @@ class SimpleNumbers
       if first_test_digit < last_test_digit && 
           last_test_digit < a_number_beyond_the_range && 
           [0, digits].include?( estimate_string_length( first_test_digit, last_test_digit ) - input_string.length ) &&
-          estimate_string_length( first_test_digit, last_test_digit ) - input_string.length <= digits
+          estimate_string_length( first_test_digit, last_test_digit ) - input_string.length <= digits &&
+          ( input_string.include?("#{first_test_digit}#{(first_test_digit + 1)}") || input_string.include?("#{(last_test_digit - 1)}#{last_test_digit}" ))
         [first_test_digit, last_test_digit]
       elsif first_test_digit < other_possible_last_test_digit && 
           other_possible_last_test_digit < a_number_beyond_the_range && 
@@ -65,6 +66,7 @@ class SimpleNumbers
     end
 
     def self.estimate_string_length(beginning, ending)
+      # def estimate_string_length(beginning, ending)
       ( ending - beginning + 1 ) * (ending.to_s.length)
     end
 
