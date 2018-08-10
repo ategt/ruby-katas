@@ -46,6 +46,14 @@ describe SimpleNumbers do
 
       end
 
+      it "should return 44489, but was returning -1." do
+
+        input = (44445..44495).to_a.map(&:to_s).join.sub '44489',''
+        result = SimpleNumbers.missing(input, [44489, 44445, 44495])
+        expect(result).to eq 44489
+
+      end
+
       it "should take a string of numbers between 1 and 9 with one missing number and return the missing number" do
         number_sequence = (1..9).
                                 to_a.

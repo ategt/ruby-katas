@@ -50,7 +50,7 @@ class SimpleNumbers
 
       if first_test_digit < last_test_digit && 
           last_test_digit < a_number_beyond_the_range && 
-          estimate_string_length( first_test_digit, last_test_digit ) - input_string.length >= 0 &&
+          [0, digits].include?( estimate_string_length( first_test_digit, last_test_digit ) - input_string.length ) &&
           estimate_string_length( first_test_digit, last_test_digit ) - input_string.length <= digits
         [first_test_digit, last_test_digit]
       elsif first_test_digit < other_possible_last_test_digit && 
