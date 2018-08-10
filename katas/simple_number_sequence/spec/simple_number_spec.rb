@@ -38,6 +38,14 @@ describe SimpleNumbers do
         expect(result).to eq 1091
       end
       
+      it "should return 9973, but was returning -1." do
+
+        input = (9969..10_000).to_a.map(&:to_s).join.sub '9973',''
+        result = SimpleNumbers.missing(input)
+        expect(result).to eq 9973
+
+      end
+
       it "should take a string of numbers between 1 and 9 with one missing number and return the missing number" do
         number_sequence = (1..9).
                                 to_a.
@@ -49,7 +57,7 @@ describe SimpleNumbers do
         expect(result).to eq @removed_number
       end
       
-      xit "should take a randomly created string of numbers and return the missing number" do
+      it "should take a randomly created string of numbers and return the missing number" do
         1_000_000.times do
           starting_int = rand(100_005)
           ending_int = starting_int + rand(50) + 3
@@ -65,7 +73,7 @@ describe SimpleNumbers do
         end
       end
       
-      xit "should take a randomly created string of numbers and return -1 because no numbers are missing" do
+      it "should take a randomly created string of numbers and return -1 because no numbers are missing" do
         1_000_000.times do
           starting_int = rand(100_005)
           ending_int = starting_int + rand(50) + 2
