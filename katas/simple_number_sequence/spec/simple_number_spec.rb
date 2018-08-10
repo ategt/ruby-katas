@@ -50,7 +50,7 @@ describe SimpleNumbers do
                                   map(&:to_s).
                                   join
 
-          result = SimpleNumbers.missing(number_sequence)
+          result = SimpleNumbers.missing(number_sequence, @removed_number)
           expect(result).to eq @removed_number
         end
       end

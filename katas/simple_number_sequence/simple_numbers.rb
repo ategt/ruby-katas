@@ -2,7 +2,7 @@ require 'byebug'
 
 class SimpleNumbers
 
-  def self.missing(input)
+  def self.missing(input, expected=nil)
     #byebug
     result = boundry_integers(input)
 
@@ -14,6 +14,8 @@ class SimpleNumbers
                                       to_a.
                                       map(&:to_s).
                                       select { |number| !input.include?(number) }
+
+      byebug if expected and !missing_number_strings.one? || missing_number_strings.last.to_i != expected
 
       if missing_number_strings.one?
         missing_number_strings.last.to_i
