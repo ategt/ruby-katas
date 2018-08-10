@@ -110,6 +110,15 @@ describe SimpleNumbers do
 
     end
 
+    it "should return 446 - 495, it was having issues, though." do
+
+      input = (446..495).to_a.map(&:to_s).join
+      first_result, second_result = SimpleNumbers.boundry_integers(input)
+      expect(first_result).to eq 446
+      expect(second_result).to eq 495
+
+    end
+
   end
 
   # bundle exec rspec spec/simple_number_spec.rb
