@@ -50,12 +50,12 @@ class SimpleNumbers
 
       if first_test_digit < last_test_digit && 
           last_test_digit < a_number_beyond_the_range && 
-          estimate_string_length( first_test_digit, last_test_digit ) - input_string.length > 0 &&
+          estimate_string_length( first_test_digit, last_test_digit ) - input_string.length >= 0 &&
           estimate_string_length( first_test_digit, last_test_digit ) - input_string.length <= digits
         [first_test_digit, last_test_digit]
       elsif first_test_digit < other_possible_last_test_digit && 
           other_possible_last_test_digit < a_number_beyond_the_range && 
-          estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length > 0 &&
+          estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length >= 0 &&
           estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length <= total_numbers &&
           estimate_minimum_string_length( first_test_digit, other_possible_last_test_digit ) < input_string.length + other_possible_last_test_digit.to_s.length
         [first_test_digit, other_possible_last_test_digit]
