@@ -1,16 +1,35 @@
+require 'byebug'
+
 class SimpleNumbers
 
   def self.missing(input)
+    #byebug
+    result = boundry_integers(input)
 
+    if result
 
+      starting_number, ending_number = result
 
+      missing_number_strings = (starting_number..ending_number).
+                                      to_a.
+                                      map(&:to_s).
+                                      select { |number| !input.include?(number) }
+
+      if missing_number_strings.one?
+        missing_number_strings.last.to_i
+      else
+        -1
+      end                                      
+    else
+      -1
+    end
   end
 
-  def self.boundry_integers(input_string)
-    (1..8).
+  def self.boundry_integers(input_string, most_digits_to_consider = 8)
+    (1..most_digits_to_consider).
           map { |test_digit_count| boundry_integers_by_digits(input_string, test_digit_count) } .
           select { |nillable_result| !!nillable_result } .
-          first
+          last
   end
 
   private

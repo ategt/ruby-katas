@@ -32,7 +32,7 @@ describe SimpleNumbers do
         number_sequence = (1..9).
                                 to_a.
                                 tap {|numbers_array| @removed_number = numbers_array.delete_at(1 + rand(numbers_array.length - 2 )) } .
-                                map {|integer| integer.to_s } .
+                                map(&:to_s).
                                 join
 
         result = SimpleNumbers.missing(number_sequence)
@@ -40,13 +40,34 @@ describe SimpleNumbers do
       end
       
       it "should take a randomly created string of numbers and return the missing number" do
-        starting_int = rand(100_005)
-        ending_int = starting_int + rand(50) + 1
+        1000.times do
+          starting_int = rand(100_005)
+          ending_int = starting_int + rand(50) + 1
 
+          number_sequence = (starting_int..ending_int).
+                                  to_a.
+                                  tap {|numbers_array| @removed_number = numbers_array.delete_at(1 + rand(numbers_array.length - 2 )) } .
+                                  map(&:to_s).
+                                  join
 
+          result = SimpleNumbers.missing(number_sequence)
+          expect(result).to eq @removed_number
+        end
+      end
+      
+      it "should take a randomly created string of numbers and return -1 because no numbers are missing" do
+        1000.times do
+          starting_int = rand(100_005)
+          ending_int = starting_int + rand(50) + 1
 
-        result = SimpleNumbers.missing()
-        expect(result).to eq -1
+          number_sequence = (starting_int..ending_int).
+                                  to_a.
+                                  map(&:to_s).
+                                  join
+
+          result = SimpleNumbers.missing(number_sequence)
+          expect(result).to eq -1
+        end
       end
       
    end
@@ -73,6 +94,14 @@ describe SimpleNumbers do
 
       result = SimpleNumbers.boundry_integers("575382")
       expect(result).to be_nil
+
+    end
+
+    it "should handle large numbers" do
+
+      first_result, second_result = SimpleNumbers.boundry_integers("10000100011000210003100041000510006")
+      expect(first_result).to eq 10000
+      expect(second_result).to eq 10006
 
     end
 
