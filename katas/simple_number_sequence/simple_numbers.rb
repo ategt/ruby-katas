@@ -1,7 +1,7 @@
 class SimpleNumbers
 
-  def self.missing(input, expected=nil)
-    test_string = "-#{input.dup}"
+  def self.missing(input)
+    test_string = "-#{input}"
     result = boundry_integers(input)
 
     if result
@@ -13,8 +13,6 @@ class SimpleNumbers
                                       to_a.
                                       map(&:to_s).
                                       select { |number| !test_string.sub!("-#{number}", '-') }
-
-      byebug if expected and !missing_number_strings.one? || missing_number_strings.last.to_i != expected.first
 
       if missing_number_strings.one?
         missing_number_strings.last.to_i

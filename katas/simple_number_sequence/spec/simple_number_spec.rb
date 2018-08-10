@@ -49,7 +49,7 @@ describe SimpleNumbers do
       it "should return 44489, but was returning -1." do
 
         input = (44445..44495).to_a.map(&:to_s).join.sub '44489',''
-        result = SimpleNumbers.missing(input, [44489, 44445, 44495])
+        result = SimpleNumbers.missing(input)
         expect(result).to eq 44489
 
       end
@@ -66,7 +66,7 @@ describe SimpleNumbers do
       end
       
       it "should take a randomly created string of numbers and return the missing number" do
-        1_000_000.times do
+        500_000.times do
           starting_int = rand(100_005)
           ending_int = starting_int + rand(50) + 3
 
@@ -76,13 +76,13 @@ describe SimpleNumbers do
                                   map(&:to_s).
                                   join
 
-          result = SimpleNumbers.missing(number_sequence, [@removed_number, starting_int, ending_int])
+          result = SimpleNumbers.missing(number_sequence)
           expect(result).to eq(@removed_number), "expected #{@removed_number}, got #{result}, using range from #{starting_int} to #{ending_int}"
         end
       end
       
       it "should take a randomly created string of numbers and return -1 because no numbers are missing" do
-        1_000_000.times do
+        100_000.times do
           starting_int = rand(100_005)
           ending_int = starting_int + rand(50) + 2
 
