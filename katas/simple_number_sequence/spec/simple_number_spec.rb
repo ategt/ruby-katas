@@ -55,7 +55,7 @@ describe SimpleNumbers do
 
     it "should return 1 and 6" do
 
-      first_result, second_result = SimpleNumbers.boundry_integers("123456", 1)
+      first_result, second_result = SimpleNumbers.boundry_integers("123456")
       expect(first_result).to eq 1
       expect(second_result).to eq 6
 
@@ -63,7 +63,7 @@ describe SimpleNumbers do
 
     it "should return 5 and 12" do
 
-      first_result, second_result = SimpleNumbers.boundry_integers("56789101112", 1)
+      first_result, second_result = SimpleNumbers.boundry_integers("56789101112")
       expect(first_result).to eq 5
       expect(second_result).to eq 12
 
@@ -71,7 +71,7 @@ describe SimpleNumbers do
 
     it "should return nil" do
 
-      result = SimpleNumbers.boundry_integers("575382", 1)
+      result = SimpleNumbers.boundry_integers("575382")
       expect(result).to be_nil
 
     end
