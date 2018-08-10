@@ -138,7 +138,7 @@ describe SimpleNumbers do
       input = (77778..77788).to_a.map(&:to_s).join.sub '77782',''
       first_result, second_result = SimpleNumbers.boundry_integers(input)
       expect(first_result).to eq 77778
-      expect(second_result).to eq 77778
+      expect(second_result).to eq 77788
 
     end
 
