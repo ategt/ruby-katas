@@ -28,6 +28,11 @@ describe SimpleNumbers do
         expect(result).to eq -1
       end
       
+      it "should return 77782, but it was returning -1" do
+        result = SimpleNumbers.missing("77778777797778077781777837778477785777867778777788")
+        expect(result).to eq 77782
+      end
+      
       it "should return 1091, but it was returning -1" do
         result = SimpleNumbers.missing("108410851086108710881089109010921093109410951096109710981099110011011102110311041105110611071108110911101111111211131114111511161117111811191120")
         expect(result).to eq 1091
@@ -47,7 +52,7 @@ describe SimpleNumbers do
       it "should take a randomly created string of numbers and return the missing number" do
         1_000_000.times do
           starting_int = rand(100_005)
-          ending_int = starting_int + rand(50) + 2
+          ending_int = starting_int + rand(50) + 3
 
           number_sequence = (starting_int..ending_int).
                                   to_a.
@@ -56,7 +61,7 @@ describe SimpleNumbers do
                                   join
 
           result = SimpleNumbers.missing(number_sequence, [@removed_number, starting_int, ending_int])
-          expect(result).to eq @removed_number
+          expect(result).to eq(@removed_number), "expected #{@removed_number}, got #{result}, using range from #{starting_int} to #{ending_int}"
         end
       end
       
@@ -116,6 +121,24 @@ describe SimpleNumbers do
       first_result, second_result = SimpleNumbers.boundry_integers(input)
       expect(first_result).to eq 446
       expect(second_result).to eq 495
+
+    end
+
+    it "should return 88 - 110, it was having issues, though." do
+
+      input = (88..110).to_a.map(&:to_s).join.sub '107',''
+      first_result, second_result = SimpleNumbers.boundry_integers(input)
+      expect(first_result).to eq 88
+      expect(second_result).to eq 110
+
+    end
+
+    it "should return 77778 - 77788, it was having issues, though." do
+
+      input = (77778..77788).to_a.map(&:to_s).join.sub '77782',''
+      first_result, second_result = SimpleNumbers.boundry_integers(input)
+      expect(first_result).to eq 77778
+      expect(second_result).to eq 77778
 
     end
 

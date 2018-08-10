@@ -32,7 +32,7 @@ class SimpleNumbers
     (1..most_digits_to_consider).
           map { |test_digit_count| boundry_integers_by_digits(input_string, test_digit_count) } .
           select { |nillable_result| !!nillable_result } .
-          last
+          first
   end
 
   private
@@ -46,13 +46,19 @@ class SimpleNumbers
 
       a_number_beyond_the_range = first_test_digit + total_numbers + 2
 
-      if first_test_digit < last_test_digit and last_test_digit < a_number_beyond_the_range
+      if first_test_digit < last_test_digit and 
+          last_test_digit < a_number_beyond_the_range and 
+          ( estimate_string_length( first_test_digit, last_test_digit ) - input_string.length ).abs < ( 10 ** digits ) + 1
         [first_test_digit, last_test_digit]
-      elsif first_test_digit < other_possible_last_test_digit and other_possible_last_test_digit < a_number_beyond_the_range
+      elsif first_test_digit < other_possible_last_test_digit and other_possible_last_test_digit < a_number_beyond_the_range and ( estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length ).abs < ( 10 ** digits ) + 2
         [first_test_digit, other_possible_last_test_digit]
       else
         nil
       end
+    end
+
+    def self.estimate_string_length(beginning, ending)
+      ( ending - beginning ) * (ending.to_s.length)
     end
 
 end 
