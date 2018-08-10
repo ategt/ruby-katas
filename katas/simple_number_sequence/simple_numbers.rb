@@ -35,9 +35,11 @@ class SimpleNumbers
           last
   end
 
-  private
+  # private
 
     def self.boundry_integers_by_digits(input_string, digits)
+      # input_string = input
+
       total_numbers = input_string.length / digits
 
       first_test_digit = input_string[0, digits].to_i
@@ -54,7 +56,8 @@ class SimpleNumbers
       elsif first_test_digit < other_possible_last_test_digit && 
           other_possible_last_test_digit < a_number_beyond_the_range && 
           estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length > 0 &&
-          estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length <= digits + 1
+          estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length <= total_numbers &&
+          estimate_minimum_string_length( first_test_digit, other_possible_last_test_digit ) < input_string.length + other_possible_last_test_digit.to_s.length
         [first_test_digit, other_possible_last_test_digit]
       else
         nil
@@ -63,6 +66,10 @@ class SimpleNumbers
 
     def self.estimate_string_length(beginning, ending)
       ( ending - beginning + 1 ) * (ending.to_s.length)
+    end
+
+    def self.estimate_minimum_string_length(beginning, ending)
+      ( ending - beginning ) * (beginning.to_s.length) + ending.to_s.length
     end
 
 end 

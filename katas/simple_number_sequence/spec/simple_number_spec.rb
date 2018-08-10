@@ -49,7 +49,7 @@ describe SimpleNumbers do
         expect(result).to eq @removed_number
       end
       
-      it "should take a randomly created string of numbers and return the missing number" do
+      xit "should take a randomly created string of numbers and return the missing number" do
         1_000_000.times do
           starting_int = rand(100_005)
           ending_int = starting_int + rand(50) + 3
@@ -65,7 +65,7 @@ describe SimpleNumbers do
         end
       end
       
-      it "should take a randomly created string of numbers and return -1 because no numbers are missing" do
+      xit "should take a randomly created string of numbers and return -1 because no numbers are missing" do
         1_000_000.times do
           starting_int = rand(100_005)
           ending_int = starting_int + rand(50) + 2
