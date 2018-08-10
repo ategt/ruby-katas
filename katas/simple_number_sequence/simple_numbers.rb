@@ -1,5 +1,3 @@
-require 'byebug'
-
 class SimpleNumbers
 
   def self.missing(input, expected=nil)
@@ -35,38 +33,42 @@ class SimpleNumbers
           last
   end
 
-  # private
+  private
 
     def self.boundry_integers_by_digits(input_string, digits)
-      # input_string = input
+      greatest_possible_number_of_numbers = input_string.length / digits
 
-      total_numbers = input_string.length / digits
+      first_test_number = input_string[0, digits].to_i
+      last_test_number = input_string[-digits, digits].to_i
+      other_possible_last_test_number = input_string[-digits-1, digits+1].to_i
 
-      first_test_digit = input_string[0, digits].to_i
-      last_test_digit = input_string[-digits, digits].to_i
-      other_possible_last_test_digit = input_string[-digits-1, digits+1].to_i
+      a_number_beyond_the_range = first_test_number + greatest_possible_number_of_numbers + 2
 
-      a_number_beyond_the_range = first_test_digit + total_numbers + 2
-
-      if first_test_digit < last_test_digit && 
-          last_test_digit < a_number_beyond_the_range && 
-          [0, digits].include?( estimate_string_length( first_test_digit, last_test_digit ) - input_string.length ) &&
-          estimate_string_length( first_test_digit, last_test_digit ) - input_string.length <= digits &&
-          ( input_string.include?("#{first_test_digit}#{(first_test_digit + 1)}") || input_string.include?("#{(last_test_digit - 1)}#{last_test_digit}" ))
-        [first_test_digit, last_test_digit]
-      elsif first_test_digit < other_possible_last_test_digit && 
-          other_possible_last_test_digit < a_number_beyond_the_range && 
-          estimate_string_length( first_test_digit, other_possible_last_test_digit ) - input_string.length >= 0 &&
-          estimate_string_length( first_test_digit, other_possible_last_test_digit ) > input_string.length + other_possible_last_test_digit.to_s.length &&
-          estimate_minimum_string_length( first_test_digit, other_possible_last_test_digit ) < input_string.length + other_possible_last_test_digit.to_s.length
-        [first_test_digit, other_possible_last_test_digit]
+      if plaussible_with_same_digit_count? input_string, first_test_number, last_test_number, a_number_beyond_the_range, digits
+        [first_test_number, last_test_number]
+      elsif plaussible_with_asscending_digit_count? input_string, first_test_number, other_possible_last_test_number, a_number_beyond_the_range
+        [first_test_number, other_possible_last_test_number]
       else
         nil
       end
     end
 
+    def self.plaussible_with_same_digit_count?(input_string, first_test_number, last_test_number, a_number_beyond_the_range, digits)
+      first_test_number < last_test_number && 
+      last_test_number < a_number_beyond_the_range && 
+      [0, digits].include?( estimate_string_length( first_test_number, last_test_number ) - input_string.length ) &&
+      ( input_string.include?("#{first_test_number}#{(first_test_number + 1)}") || input_string.include?("#{(last_test_number - 1)}#{last_test_number}" ))
+    end
+
+    def self.plaussible_with_asscending_digit_count?(input_string, first_test_number, last_test_number, a_number_beyond_the_range)
+      first_test_number < last_test_number && 
+      last_test_number < a_number_beyond_the_range && 
+      estimate_string_length( first_test_number, last_test_number ) >= input_string.length &&
+      estimate_string_length( first_test_number, last_test_number ) > input_string.length + last_test_number.to_s.length &&
+      estimate_minimum_string_length( first_test_number, last_test_number ) < input_string.length + last_test_number.to_s.length
+    end
+
     def self.estimate_string_length(beginning, ending)
-      # def estimate_string_length(beginning, ending)
       ( ending - beginning + 1 ) * (ending.to_s.length)
     end
 

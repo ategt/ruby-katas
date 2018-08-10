@@ -169,10 +169,4 @@ describe SimpleNumbers do
 
   end
 
-  # bundle exec rspec spec/simple_number_spec.rb
-  # missing("123567") = 4 
-  # missing("899091939495") = 92
-  # missing("9899101102") = 100
-  # missing("599600601602") = -1 -- no number missing
-  # missing("8990919395") = -1 -- error in sequence. Both 92 and 94 missing.
 end
