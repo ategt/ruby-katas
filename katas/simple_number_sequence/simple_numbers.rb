@@ -3,19 +3,20 @@ require 'byebug'
 class SimpleNumbers
 
   def self.missing(input, expected=nil)
-    #byebug
+    test_string = "-#{input.dup}"
     result = boundry_integers(input)
 
     if result
 
       starting_number, ending_number = result
 
-      missing_number_strings = (starting_number..ending_number).
+      missing_number_strings = 
+          (starting_number..ending_number).
                                       to_a.
                                       map(&:to_s).
-                                      select { |number| !input.include?(number) }
+                                      select { |number| !test_string.sub!("-#{number}", '-') }
 
-      byebug if expected and !missing_number_strings.one? || missing_number_strings.last.to_i != expected
+      byebug if expected and !missing_number_strings.one? || missing_number_strings.last.to_i != expected.first
 
       if missing_number_strings.one?
         missing_number_strings.last.to_i

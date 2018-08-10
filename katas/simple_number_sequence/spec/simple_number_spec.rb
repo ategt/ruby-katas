@@ -28,6 +28,11 @@ describe SimpleNumbers do
         expect(result).to eq -1
       end
       
+      it "should return 1091, but it was returning -1" do
+        result = SimpleNumbers.missing("108410851086108710881089109010921093109410951096109710981099110011011102110311041105110611071108110911101111111211131114111511161117111811191120")
+        expect(result).to eq 1091
+      end
+      
       it "should take a string of numbers between 1 and 9 with one missing number and return the missing number" do
         number_sequence = (1..9).
                                 to_a.
@@ -40,9 +45,9 @@ describe SimpleNumbers do
       end
       
       it "should take a randomly created string of numbers and return the missing number" do
-        1000.times do
+        1_000_000.times do
           starting_int = rand(100_005)
-          ending_int = starting_int + rand(50) + 1
+          ending_int = starting_int + rand(50) + 2
 
           number_sequence = (starting_int..ending_int).
                                   to_a.
@@ -50,15 +55,15 @@ describe SimpleNumbers do
                                   map(&:to_s).
                                   join
 
-          result = SimpleNumbers.missing(number_sequence, @removed_number)
+          result = SimpleNumbers.missing(number_sequence, [@removed_number, starting_int, ending_int])
           expect(result).to eq @removed_number
         end
       end
       
       it "should take a randomly created string of numbers and return -1 because no numbers are missing" do
-        1000.times do
+        1_000_000.times do
           starting_int = rand(100_005)
-          ending_int = starting_int + rand(50) + 1
+          ending_int = starting_int + rand(50) + 2
 
           number_sequence = (starting_int..ending_int).
                                   to_a.
@@ -66,7 +71,7 @@ describe SimpleNumbers do
                                   join
 
           result = SimpleNumbers.missing(number_sequence)
-          expect(result).to eq -1
+          expect(result).to eq(-1), "expected -1, got #{result}, using range from #{starting_int} to #{ending_int}"
         end
       end
       
