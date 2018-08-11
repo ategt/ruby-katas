@@ -1,4 +1,4 @@
-# Ruby Katas
+# Ruby Katas  [![Build Status](https://travis-ci.org/ategt/ruby-katas.svg?branch=master)](https://travis-ci.org/ategt/ruby-katas)
 
 ### Background
 
