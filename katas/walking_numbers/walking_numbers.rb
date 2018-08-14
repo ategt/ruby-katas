@@ -6,8 +6,6 @@ class WalkingNumbers
     result_matrix = initalize_result input_matrix
     origin_number = input_matrix[0][0]
 
-    byebug
-
     @old_result_count, @new_result_count = -1, 0
 
     while @old_result_count < @new_result_count do
@@ -32,9 +30,6 @@ class WalkingNumbers
   end
 
   def self.detect x, y, input_matrix, result_matrix, origin_number
-    puts "x: #{x}, y: #{y}"
-    byebug if origin_number == 7
-   
     if input_matrix[y][x] == origin_number
       if x - 1 >= 0 && result_matrix[y][x-1] == 1
         true
