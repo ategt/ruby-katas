@@ -3,7 +3,7 @@ require 'byebug'
 def update_quality(items)
   items.each do |item|
     if item.name == 'Conjured Mana Cake'
-      byebug
+      # byebug
       if item.sell_in > 0
         item.quality -= 2
       else
@@ -12,6 +12,7 @@ def update_quality(items)
       if item.quality < 0
         item.quality = 0
       end
+      item.sell_in -= 1
 
     else
 
