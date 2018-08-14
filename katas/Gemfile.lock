@@ -3,6 +3,8 @@ GEM
   specs:
     byebug (10.0.2)
     diff-lcs (1.3)
+    given_core (3.8.0)
+      sorcerer (>= 0.3.7)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -12,17 +14,22 @@ GEM
     rspec-expectations (3.8.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
+    rspec-given (3.8.0)
+      given_core (= 3.8.0)
+      rspec (>= 2.14.0)
     rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    sorcerer (1.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   byebug (~> 10.0, >= 10.0.2)
-  rspec (~> 3.5)
+  rspec (~> 3.8)
+  rspec-given (~> 3.8.0)
 
 BUNDLED WITH
    1.14.6
