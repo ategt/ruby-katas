@@ -16,7 +16,8 @@ describe WalkingNumbers do
          [0, 0, 0]
       ] # This is the case that I created, with only no meaningful places to walk.
 
-      result = WalkingNumbers.process city0
+      walking_numbers = WalkingNumbers.new city0
+      result = walking_numbers.process
       expect(result).to eq contaminatedInCity0
     end
 
@@ -33,7 +34,8 @@ describe WalkingNumbers do
          [0, 0, 0]
       ] # This is another case that I created, other numbers block the path from origin to the other ones.
 
-      result = WalkingNumbers.process city0
+      walking_numbers = WalkingNumbers.new city0
+      result = walking_numbers.process
       expect(result).to eq contaminatedInCity0
     end
 
@@ -50,7 +52,8 @@ describe WalkingNumbers do
          [0, 0, 0]
       ] # number 7 is a zombie, but the 7 in bottom right corner is not a zombie yet - the virus didn't get there.
 
-      result = WalkingNumbers.process city1      
+      walking_numbers = WalkingNumbers.new city1
+      result = walking_numbers.process
       expect(result).to eq contaminatedInCity1
     end
 
@@ -69,9 +72,49 @@ describe WalkingNumbers do
          [0, 0, 0]
       ] #infection inflicted the 9s, but the virus didn't get to the one in the south of the city yet.
 
-      result = WalkingNumbers.process city2
+      walking_numbers = WalkingNumbers.new city2
+      result = walking_numbers.process
       expect(result).to eq contaminatedInCity2
     end
 
+    it "should be all positive results" do 
+      city4 = [
+         [5, 5, 5, 5],
+         [5, 5, 5, 5],
+         [5, 5, 5, 5],
+         [5, 5, 5, 5]
+      ]
+
+      contaminatedInCity4 = [
+         [1, 1, 1, 1],
+         [1, 1, 1, 1],
+         [1, 1, 1, 1],
+         [1, 1, 1, 1]
+      ]
+
+      walking_numbers = WalkingNumbers.new city4
+      result = walking_numbers.process
+      expect(result).to eq contaminatedInCity4
+    end
+
+    it "should have eight positive results, including the middle" do 
+      city3 = [
+         [3, 3, 3, 8],
+         [9, 9, 3, 8],
+         [7, 3, 3, 3],
+         [7, 9, 3, 8]
+      ]
+
+      contaminatedInCity3 = [
+         [1, 1, 1, 0],
+         [0, 0, 1, 0],
+         [0, 1, 1, 1],
+         [0, 0, 1, 0]
+      ]
+
+      walking_numbers = WalkingNumbers.new city3
+      result = walking_numbers.process
+      expect(result).to eq contaminatedInCity3
+    end
   end
 end
